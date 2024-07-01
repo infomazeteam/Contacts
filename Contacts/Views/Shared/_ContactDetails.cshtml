@@ -1,0 +1,74 @@
+﻿@model ContactService.ContactModel
+<div class="modal-header">
+    <div class="pull-right">
+        <button id="closebutton" type="button" class="close" data-dismiss="modal">&times;</button>
+    </div>
+    <h5 id="contacttitle" class="modal-title"></h5>
+</div>
+<div class="modal-body no-padding-bottom">
+    <div class="row employeeDetailsSidebySide">
+        <ul class="media-list col-sm-12">
+            <li>
+                <span class="modaldesign">First Name:</span>
+                <span style="word-break: break-all;">@Model.FirstName</span>
+            </li>
+        </ul>
+        <ul class="media-list col-sm-12">
+            <li>
+                <span class="modaldesign">Last Name:</span>
+                <span style="word-break: break-all;">@(Model.LastName != null && Model.LastName != "" ? Model.LastName : "-")</span>
+            </li>
+        </ul>
+        <ul class="media-list col-sm-12">
+            <li>
+                <span class="modaldesign">Email:</span>
+                <span class="text-primary">@Model.Email </span>
+            </li>
+        </ul>
+        <ul class="media-list col-sm-12">
+            <li>
+                <span class="modaldesign">Mobile:</span>
+                <span class="text-primary">@Model.Mobile </span>
+            </li>
+        </ul>
+        <ul class="media-list col-sm-12">
+            <li>
+                <span class="modaldesign">Phone:</span>
+                <span class="text-primary">@Model.Phone </span>
+            </li>
+        </ul>
+        <ul class="media-list col-sm-12">
+            <li>
+                <span class="modaldesign">Address1:</span>
+                <span class="text-primary">@Model.Address1 </span>
+            </li>
+        </ul>
+        <ul class="media-list col-sm-12">
+            <li>
+                <span class="modaldesign">Address2:</span>
+                <span class="text-primary">@Model.Address1 </span>
+            </li>
+        </ul>
+        <ul class="media-list col-sm-12">
+            <li>
+                <span class="modaldesign">State:</span>
+                <span class="text-primary">@Model.State </span>
+            </li>
+        </ul>
+        <ul class="media-list col-sm-12">
+            <li>
+                <span class="modaldesign">Zip:</span>
+                <span class="text-primary">@Model.Zip </span>
+            </li>
+        </ul>
+        <ul class="media-list col-sm-12">
+            <li>
+                <span class="modaldesign">Country:</span>
+                <span class="text-primary">@Model.Country </span>
+            </li>
+        </ul>
+    </div>
+    <div class="modal-footer pt-10">
+        <button type="button" class="btn" data-dismiss="modal">Cancel</button>
+    </div>
+</div>

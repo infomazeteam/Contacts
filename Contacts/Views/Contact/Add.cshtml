@@ -1,0 +1,135 @@
+﻿@model ContactService.ContactModel
+@{
+    ViewData["Title"] = "Contact Add";
+}
+<div class="content">
+    <div class="panel panel-white col-md-12 no-padding">
+        <div class="panel-heading">
+            @if(Model.ContactID > 0)
+            {
+                <h6 class="panel-title">Edit Contact</h6>
+            }
+            else
+            {
+                <h6 class="panel-title">Add Contact</h6>
+            }
+        </div>
+        <div class="panel-body">
+            <form asp-action="Add" asp-controller="Contact" data-ajax="true" dat-ajax-method="post" data-ajax-success="onSuccessContact" enctype="multipart/form-data" id="ContactForm">
+                @Html.HiddenFor(model => model.ContactID, new { @id = "hdnContactID" })
+                <div class='panel panel-flat'>
+                    <div class='panel-body'>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>First Name:</label>
+                                    @Html.TextBoxFor(model => model.FirstName, "", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger", @id = "" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Last Name:</label>
+                                    @Html.TextBoxFor(model => model.LastName, "", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger", @id = "" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    @Html.TextBoxFor(model => model.Email, "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Mobile:</label>
+                                    @Html.TextBoxFor(model => model.Mobile, "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Phone:</label>
+                                    @Html.TextBoxFor(model => model.Phone, "", new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Address1:</label>
+                                    @Html.TextBoxFor(model => model.Address1, "", new { @class = "form-control google-map-address" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Address2:</label>
+                                    @Html.TextBoxFor(model => model.Address2, "", new { @class = "form-control google-map-address2" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    @Html.TextBoxFor(model => model.City, "", new { @class = "form-control google-map-city" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    @Html.TextBoxFor(model => model.State, "", new { @class = "form-control google-map-state" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Zip</label>
+                                    @Html.TextBoxFor(model => model.Zip, "", new { @class = "form-control google-map-zip" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    @{
+                                        List<SelectListItem> countryList = new List<SelectListItem>();
+                                        countryList.Add(new SelectListItem { Text = "India ", Value = "India" });
+                                        countryList.Add(new SelectListItem { Text = "USA", Value = "USA" });
+                                    }
+                                    @Html.DropDownListFor(model => model.Country, countryList, "Select", htmlAttributes: new { @class = "form-control select" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="float:right">
+                    @if(Model.ContactID > 0)
+                    {
+                        <button type="button" id="btncontactsubmit" class="btn btn-primary" style="float:right">Update</button>
+                    }else{
+                        <button type="button" id="btncontactsubmit" class="btn btn-primary" style="float:right">Submit</button>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8t3T8XD5j_n5Vv-Kz-M0DXlhiK645be0&libraries=geometry,places&ext=.js"></script>
+    <script src="~/js/googleaddress.js" asp-append-version="true"></script>
+    <script src="~/js/contact.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            initAutocomplete();
+        });
+        var onSuccessContact = function (context) {
+            window.location.href = '@Url.Action("Index", "Contact")';
+        }
+    </script>
+}
